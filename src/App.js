@@ -2,6 +2,7 @@ import "./App.css";
 import Layout from "./components/Layout";
 
 import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/pages/Home";
 
 export default function App() {
   return (
@@ -22,14 +23,6 @@ export default function App() {
         </Route>
       </Routes>
     </>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
   );
 }
 

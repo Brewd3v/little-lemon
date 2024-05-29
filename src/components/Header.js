@@ -6,8 +6,8 @@ import Nav from "./Nav";
 export default function Header() {
   return (
     <>
-      <header className="flex max-w-[860px] mx-auto items-center justify-between py-6">
-        <img src={logo} alt="little lemon logo" height={50} width={184} />
+      <header className="md:flex hidden max-w-[860px] mx-auto items-center justify-between py-6 px-2">
+        <img src={logo} alt="little lemon" height={50} width={184} />
         <Nav />
       </header>
       <header className="flex items-center justify-between px-4 py-4 md:hidden">

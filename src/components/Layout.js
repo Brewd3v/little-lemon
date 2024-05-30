@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Layout() {
   return (
@@ -11,6 +12,7 @@ export default function Layout() {
             so you can think about this <Outlet> as a placeholder for
             the child routes we defined above. */}
       <Outlet />
+      <Footer />
     </div>
   );
 }

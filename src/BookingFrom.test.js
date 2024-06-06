@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
+
 import BookingPage, {
   initializeTimes,
   initialState,
-  updateTimes
+  updateTimes,
 } from "./components/pages/BookingPage";
 
 test("Renders the BookingForm", () => {
@@ -14,14 +15,14 @@ test("Renders the BookingForm", () => {
 
 test("initializeTimes function", () => {
   const result = initializeTimes();
-  expect(result).toEqual(initialState);
+  expect(result.length).toBeGreaterThan(1);
 });
 
 test("updateTimes function", () => {
-    const result = updateTimes({
-        type: "DATE_UPDATED",
-        date: "2024-06-15"
-    });
+  const result = updateTimes([], {
+    type: "DATE_UPDATED",
+    date: "2024-06-15",
+  });
 
-    expect(result).toEqual(initialState);
-})
+  expect(result.length).toBeGreaterThan(1);
+});

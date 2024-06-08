@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import heroImage from "../../assets/restauranfood.jpg";
 
 export default function HomeHero() {
@@ -18,12 +19,12 @@ export default function HomeHero() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <button
-              type="button"
-              className="inline-block w-full max-w-xs px-4 py-3 text-center duration-150 text-lead bg-primary-yellow hover:bg-primary-coral rounded-2xl"
+            <Link
+              to="/reservations"
+              className="inline-block max-w-xs px-6 py-3 text-center duration-150 text-lead bg-primary-yellow hover:bg-primary-coral rounded-2xl"
             >
               Reserve a table
-            </button>
+            </Link>
           </div>
         </div>
         <div className="relative w-full mt-6 md:mt-0 md:w-1/2">

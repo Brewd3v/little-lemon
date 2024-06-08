@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FoodCard from "../FoodCard";
 
 export default function HomeSpecials() {
@@ -26,7 +27,12 @@ export default function HomeSpecials() {
     <section className="py-12 max-w-[860px] mx-auto px-2">
       <header className="flex items-center justify-between">
         <h2 className="text-title">This weeks specials!</h2>
-        <a href="/online-menu">Online Menu</a>
+        <Link
+          to="/online-menu"
+          className="inline-block max-w-xs px-6 py-3 text-center duration-150 text-lead bg-primary-yellow hover:bg-primary-coral rounded-2xl"
+        >
+          Online Menu
+        </Link>
       </header>
       <main className="grid gap-6 mt-4 sm:grid-cols-2 md:grid-cols-3">
         {meals &&

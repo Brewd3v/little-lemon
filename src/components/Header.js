@@ -2,12 +2,15 @@ import logo from "../assets/logo.png";
 import HamburgerIcon from "../components/icons/Hamburger";
 import BasketIcon from "../components/icons/Basket";
 import Nav from "./Nav";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <>
       <header className="md:flex hidden max-w-[860px] mx-auto items-center justify-between py-6 px-2">
-        <img src={logo} alt="little lemon" height={50} width={184} />
+        <Link to="/">
+          <img src={logo} alt="little lemon" height={50} width={184} />
+        </Link>
         <Nav />
       </header>
       <header className="flex items-center justify-between px-4 py-4 md:hidden">

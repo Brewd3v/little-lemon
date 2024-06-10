@@ -20,10 +20,7 @@ const validationSchema = Yup.object({
   cvv: Yup.string()
     .matches(/^[0-9]{3,4}$/, "Invalid CVV")
     .required("CVV is required"),
-  cardNumber: Yup.string()
-    .min(16)
-    .max(19)
-    .required("Card number is required"),
+  cardNumber: Yup.string().min(16).max(19).required("Card number is required"),
   expiryDate: Yup.string()
     .required("Expiry date is required MM/YY")
     .test("valid-month", "Invalid month", function (value) {
@@ -61,7 +58,7 @@ export default function CreateAccount({ setCurrentStep }) {
     return value
       .replace(/\D/g, "")
       .replace(/(.{4})/g, "$1 ")
-      .trim()
+      .trim();
   };
 
   const formatExpiryDate = (value) => {
@@ -83,7 +80,7 @@ export default function CreateAccount({ setCurrentStep }) {
     const res = await submitAPI(values);
     if (res) {
       console.log(values);
-      setCurrentStep(2);
+      setCurrentStep(3);
     }
   }
 
@@ -113,12 +110,19 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="firstName"
               className={`
-                ${errors.firstName && touched.firstName && "border-red-600"}
+                ${errors.firstName && touched.firstName && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="firstName"
               placeholder="First name"
+              aria-invalid={errors.firstName && touched.firstName}
+              aria-describedby={
+                errors.firstName && touched.firstName && "firstNameError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="firstNameError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="firstName" />
             </p>
           </div>
@@ -127,12 +131,19 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="lastName"
               className={`
-                ${errors.lastName && touched.lastName && "border-red-600"}
+                ${errors.lastName && touched.lastName && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="lastName"
               placeholder="Last name"
+              aria-invalid={errors.lastName && touched.lastName}
+              aria-describedby={
+                errors.lastName && touched.lastName && "lastNameError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="lastNameError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="lastName" />
             </p>
           </div>
@@ -141,12 +152,19 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="number"
               className={`
-                ${errors.number && touched.number && "border-red-600"}
+                ${errors.number && touched.number && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="number"
               placeholder="Contact number"
+              aria-invalid={errors.number && touched.number}
+              aria-describedby={
+                errors.number && touched.number && "numberError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="numberError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="number" />
             </p>
           </div>
@@ -159,13 +177,15 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="email"
               className={`
-                ${errors.email && touched.email && "border-red-600"}
+                ${errors.email && touched.email && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="email"
               type="email"
               placeholder="Email"
+              aria-invalid={errors.email && touched.email}
+              aria-describedby={errors.email && touched.email && "emailError"}
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p id="emailError" className="mt-2 text-sm text-red-600 text-karla">
               <ErrorMessage name="email" />
             </p>
           </div>
@@ -174,13 +194,20 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="password"
               className={`
-                ${errors.password && touched.password && "border-red-600"}
+                ${errors.password && touched.password && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="password"
               type="password"
               placeholder="Password"
+              aria-invalid={errors.password && touched.password}
+              aria-describedby={
+                errors.password && touched.password && "passwordError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="passwordError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="password" />
             </p>
           </div>
@@ -192,14 +219,23 @@ export default function CreateAccount({ setCurrentStep }) {
                 ${
                   errors.accountHolder &&
                   touched.accountHolder &&
-                  "border-red-600"
+                  "!border-red-600"
                 }
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="accountHolder"
               type="accountHolder"
               placeholder="Account holder (name on card)"
+              aria-invalid={errors.accountHolder && touched.accountHolder}
+              aria-describedby={
+                errors.accountHolder &&
+                touched.accountHolder &&
+                "accountHolderError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="accountHolderError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="accountHolder" />
             </p>
           </div>
@@ -208,7 +244,7 @@ export default function CreateAccount({ setCurrentStep }) {
             <Field
               data-testid="cardNumber"
               className={`
-                ${errors.cardNumber && touched.cardNumber && "border-red-600"}
+                ${errors.cardNumber && touched.cardNumber && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="cardNumber"
               type="cardNumber"
@@ -219,8 +255,15 @@ export default function CreateAccount({ setCurrentStep }) {
                 handleChange(e);
               }}
               maxLength={19}
+              aria-invalid={errors.cardNumber && touched.cardNumber}
+              aria-describedby={
+                errors.cardNumber && touched.cardNumber && "cardNumberError"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="cardNumberError"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="cardNumber" />
             </p>
           </div>
@@ -230,13 +273,22 @@ export default function CreateAccount({ setCurrentStep }) {
               <Field
                 data-testid="expiryDate"
                 className={`
-                ${errors.expiryDate && touched.expiryDate && "border-red-600"}
+                ${errors.expiryDate && touched.expiryDate && "!border-red-600"}
                 border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
                 name="expiryDate"
                 type="expiryDate"
                 placeholder="Expiry date eg. MM/YY"
+                value={formatExpiryDate(values.expiryDate)}
+                onChange={(e) => {
+                  e.target.value = formatExpiryDate(e.target.value);
+                  handleChange(e);
+                }}
+                aria-invalid={errors.expiryDate && touched.expiryDate}
+                aria-describedby={
+                  errors.expiryDate && touched.expiryDate && "expiryDateError"
+                }
               />
-              <p className="mt-2 text-sm text-red-600 text-karla">
+              <p id="expiryDateError" className="mt-2 text-sm text-red-600 text-karla">
                 <ErrorMessage name="expiryDate" />
               </p>
             </div>
@@ -251,16 +303,20 @@ export default function CreateAccount({ setCurrentStep }) {
                 <Field
                   data-testid="cvv"
                   className={`
-                    ${errors.cvv && touched.cvv && "border-red-600"}
+                    ${errors.cvv && touched.cvv && "!border-red-600"}
                     border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
                   name="cvv"
                   type="cvv"
                   placeholder="CVV"
+                  aria-invalid={errors.cvv && touched.cvv}
+                  aria-describedby={
+                    errors.cvv && touched.cvv && "cvvError"
+                  }
                 />
               </div>
 
               <div className="flex justify-between mt-3">
-                <p className="text-sm text-red-600 text-karla">
+                <p id="cvvError" className="text-sm text-red-600 text-karla">
                   <ErrorMessage name="cvv" />
                 </p>
                 <img

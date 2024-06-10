@@ -16,7 +16,7 @@ export function updateTimes(state, action) {
 }
 
 export default function BookingPage() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [availableTimes, dispatch] = useReducer(
     updateTimes,
     [],

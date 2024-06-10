@@ -12,13 +12,24 @@ export default function BookingForm({
   setCurrentStep,
 }) {
   const validationSchema = Yup.object({
-    date: Yup.string().required("Please select a booking date"),
+    date: Yup.string()
+      .required("Please select a booking date")
+      .test(
+        "dates-test",
+        "Booking date should be in the future",
+        (value, context) => {
+          let today = moment().format("MM/DD/YYYY");
+          let givenDate = moment(value).format("MM/DD/YYYY");
+          return givenDate >= today;
+        }
+      ),
     time: Yup.string().required("Please select a time"),
     guests: Yup.number()
       .required("Please specify how many guests are coming")
       .min(1)
       .max(10),
     occasion: Yup.string(),
+    additional: Yup.string().max(100, "Comment must be at most 100 characters"),
   });
 
   async function handleSubmit(values) {
@@ -50,12 +61,16 @@ export default function BookingForm({
             </label>
             <div className="mt-2">
               <FormDatePicker
+                className={`
+                ${errors.date && touched.date && "!border-red-600"}
+                border-2 border-transparent !pl-12 w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
                 name="date"
                 dispatch={dispatch}
-                data-testid="datepicker"
+                aria-invalid={errors.date && touched.date}
+                aria-describedby={errors.date && touched.date && "dateErrors"}
               />
             </div>
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p id="dateErrors" className="mt-2 text-sm text-red-600 text-karla">
               <ErrorMessage name="date" />
             </p>
           </div>
@@ -66,19 +81,23 @@ export default function BookingForm({
             </label>
             <select
               data-testid="time"
-              className="w-full h-12 px-4 mt-2 shadow-lg text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green"
+              className={`
+                ${errors.expiryDate && touched.expiryDate && "!border-red-600"}
+                border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               id="time"
               name="time"
               value={values.time}
               onBlur={handleBlur}
               onChange={handleChange}
+              aria-invalid={errors.time && touched.time}
+              aria-describedby={errors.time && touched.time && "timeError"}
             >
               {availableTimes.map((time) => (
                 <option key={time}>{time}</option>
               ))}
             </select>
             <br />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p id="timeError" className="mt-2 text-sm text-red-600 text-karla">
               {errors.time && touched.time && errors.time}
             </p>
           </div>
@@ -89,12 +108,21 @@ export default function BookingForm({
             </label>
             <Field
               data-testid="guests"
-              className="w-full h-12 px-4 mt-2 shadow-lg text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green"
+              className={`
+                ${errors.date && touched.date && "!border-red-600"}
+                border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="guests"
               type="number"
               placeholder="between 1 - 10"
+              aria-invalid={errors.guests && touched.guests}
+              aria-describedby={
+                errors.guests && touched.guests && "guestsErrors"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="guestsErrors"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="guests" />
             </p>
           </div>
@@ -114,12 +142,19 @@ export default function BookingForm({
                 value={values.seated}
                 onBlur={handleBlur}
                 onChange={handleChange}
+                aria-invalid={errors.seated && touched.seated}
+                aria-describedby={
+                  errors.seated && touched.seated && "seatedErrors"
+                }
               >
                 <option value="Inside">Inside</option>
                 <option value="Outside">Outside</option>
               </select>
             </div>
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="seatedErrors"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               {errors.seated && touched.seated && errors.seated}
             </p>
           </div>
@@ -157,13 +192,22 @@ export default function BookingForm({
             </label>
             <Field
               data-testid="additional"
-              className="w-full px-4 py-3 mt-2 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green"
+              className={`
+                ${errors.additional && touched.additional && "!border-red-600"}
+                border-2 border-transparent w-full px-4 py-3 shadow-lg min-h-12 text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green`}
               name="additional"
               as="textarea"
               rows="4"
-              placeholder="eg. one of the guests is in a wheelchair. "
+              placeholder="eg. one of the guests is in a wheelchair."
+              aria-invalid={errors.additional && touched.additional}
+              aria-describedby={
+                errors.additional && touched.additional && "additionalErrors"
+              }
             />
-            <p className="mt-2 text-sm text-red-600 text-karla">
+            <p
+              id="additionalErrors"
+              className="mt-2 text-sm text-red-600 text-karla"
+            >
               <ErrorMessage name="additional" />
             </p>
           </div>
@@ -181,7 +225,7 @@ export default function BookingForm({
   );
 }
 
-const FormDatePicker = ({ name = "", dispatch }) => {
+const FormDatePicker = ({ name = "", dispatch, className }) => {
   const [field, meta, helpers] = useField(name);
 
   const { value } = meta;
@@ -194,7 +238,7 @@ const FormDatePicker = ({ name = "", dispatch }) => {
 
   return (
     <DatePicker
-      className="w-full h-12 !pl-12 pr-4 shadow-lg text-p bg-primary-lightGray rounded-xl focus:border-primary-green focus:outline-primary-green"
+      className={className}
       format="DD/MM/YYYY"
       {...field}
       showIcon

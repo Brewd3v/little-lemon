@@ -8,11 +8,11 @@ export default function Nav() {
     },
     {
       title: "About",
-      url: "/about",
+      url: "/",
     },
     {
       title: "Menu",
-      url: "/menu",
+      url: "/",
     },
     {
       title: "Reservations",
@@ -20,11 +20,11 @@ export default function Nav() {
     },
     {
       title: "Order Online",
-      url: "/order-online",
+      url: "/",
     },
     {
       title: "Login",
-      url: "/login",
+      url: "/",
     },
   ];
 

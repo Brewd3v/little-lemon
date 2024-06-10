@@ -45,4 +45,53 @@
   .text-highlighted {
     @apply text-base font-medium font-karla text-primary-green;
   }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(http://localhost:3000/chev-down.svg) #edefee no-repeat 98.5% !important;
+    background: url(http://localhost:3000/chev-down.svg) #edefee no-repeat
+      calc(100% - 10px) !important;
+  }
+
+  select.active {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(http://localhost:3000/chev-down-active.svg) #495e57
+      no-repeat 98.5% !important;
+    background: url(http://localhost:3000/chev-down-active.svg) #495e57
+      no-repeat calc(100% - 10px) !important;
+  }
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range {
+  background-color: #495e57 !important;
+}
+
+.react-datepicker__header {
+  background-color: #edefee !important;
+}
+
+.react-datepicker__calendar-icon {
+  fill: #495e57;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5rem;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }

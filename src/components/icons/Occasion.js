@@ -1,7 +1,7 @@
 export default function OccasionIcon({ className }) {
   return (
     <svg
-      className={className ?? ""}
+      className={className}
       viewBox="0 0 32 26"
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"

@@ -22,7 +22,7 @@ export default function HomeTestimonials() {
   return (
     <section className="pt-12 pb-24 bg-primary-lightGray">
       <h2 className="pb-6 text-center text-title">Testimonials</h2>
-      <div className="max-w-[860px] px-2 mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="max-w-[860px] px-4 md:px-2 mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         {testimonials &&
           testimonials.map((item) => (
             <TestimonialCard

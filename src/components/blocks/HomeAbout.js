@@ -3,7 +3,7 @@ import about2 from "../../assets/about-mario-and-adrian.jpg";
 
 export default function HomeAbout() {
   return (
-    <div className="flex flex-wrap max-w-[860px] mx-auto px-2 pt-24 pb-60">
+    <div className="flex flex-wrap max-w-[860px] mx-auto px-4 md:px-2 pt-12 md:pt-24 pb-12 md:pb-60">
       <div className="w-full md:w-1/2">
         <div className="mb-4">
           <h1 className="mb-0 leading-none text-title">Little Lemon</h1>

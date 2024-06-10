@@ -24,11 +24,11 @@ export default function HomeSpecials() {
   ];
 
   return (
-    <section className="py-12 max-w-[860px] mx-auto px-2">
-      <header className="flex items-center justify-between">
-        <h2 className="text-title">This weeks specials!</h2>
+    <section className="py-12 max-w-[860px] mx-auto px-4  md:px-2">
+      <header className="flex flex-wrap items-center justify-between">
+        <h2 className="pb-2 pr-2 text-subtitle md:text-title">This weeks specials!</h2>
         <Link
-          to="/online-menu"
+          to="/"
           className="inline-block max-w-xs px-6 py-3 text-center duration-150 text-lead bg-primary-yellow hover:bg-primary-coral rounded-2xl"
         >
           Online Menu

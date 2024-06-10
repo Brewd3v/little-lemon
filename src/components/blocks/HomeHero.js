@@ -4,7 +4,7 @@ import heroImage from "../../assets/restauranfood.jpg";
 export default function HomeHero() {
   return (
     <div className="bg-primary-green">
-      <div className="max-w-[860px] mx-auto px-2 py-12 flex flex-wrap">
+      <div className="max-w-[860px] mx-auto px-4 md:px-2 py-12 flex flex-wrap">
         <div className="w-full md:w-1/2">
           <div className="mb-4">
             <h1 className="mb-0 leading-none text-title text-primary-yellow">

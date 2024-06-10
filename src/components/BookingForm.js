@@ -7,6 +7,8 @@ import { submitAPI } from "../lib/api";
 import moment from "moment";
 
 export default function BookingForm({
+  info,
+  setInfo,
   availableTimes,
   dispatch,
   setCurrentStep,
@@ -37,6 +39,7 @@ export default function BookingForm({
     if (res) {
       console.log(values);
       setCurrentStep(2);
+      setInfo({ ...info, booking: values });
     }
   }
 

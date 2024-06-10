@@ -53,7 +53,7 @@ const validationSchema = Yup.object({
     ),
 });
 
-export default function CreateAccount({ setCurrentStep }) {
+export default function CreateAccount({ setCurrentStep, info, setInfo }) {
   const formatCardNumber = (value) => {
     return value
       .replace(/\D/g, "")
@@ -81,6 +81,7 @@ export default function CreateAccount({ setCurrentStep }) {
     if (res) {
       console.log(values);
       setCurrentStep(3);
+      setInfo({ ...info, account: values });
     }
   }
 
@@ -288,7 +289,10 @@ export default function CreateAccount({ setCurrentStep }) {
                   errors.expiryDate && touched.expiryDate && "expiryDateError"
                 }
               />
-              <p id="expiryDateError" className="mt-2 text-sm text-red-600 text-karla">
+              <p
+                id="expiryDateError"
+                className="mt-2 text-sm text-red-600 text-karla"
+              >
                 <ErrorMessage name="expiryDate" />
               </p>
             </div>
@@ -309,9 +313,7 @@ export default function CreateAccount({ setCurrentStep }) {
                   type="cvv"
                   placeholder="CVV"
                   aria-invalid={errors.cvv && touched.cvv}
-                  aria-describedby={
-                    errors.cvv && touched.cvv && "cvvError"
-                  }
+                  aria-describedby={errors.cvv && touched.cvv && "cvvError"}
                 />
               </div>
 
